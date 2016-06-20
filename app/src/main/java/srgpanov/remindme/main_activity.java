@@ -1,7 +1,5 @@
 package srgpanov.remindme;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -12,11 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import srgpanov.remindme.adapter.TabsPagerFragmentAdapter;
+import srgpanov.remindme.adapter.TabsFragmentAdapter;
 
 
 public class main_activity extends AppCompatActivity {
@@ -40,7 +34,7 @@ public class main_activity extends AppCompatActivity {
 
     private void initTabs() {
         viewPager = (ViewPager)findViewById(R.id.viewPager);
-        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        TabsFragmentAdapter adapter = new TabsFragmentAdapter(this,getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         TabLayout tabLayout=(TabLayout)findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
@@ -65,13 +59,14 @@ public class main_activity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.view_navigation_open,R.string.view_navigation_close);
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
+
         NavigationView navigationView = (NavigationView)findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener()
         {@Override
             public boolean onNavigationItemSelected(MenuItem menuItem){
             drawerLayout.closeDrawers();
             switch (menuItem.getItemId()){
-                case R.id.action_notifcation_item:
+                case R.id.action_notification_item:
                     showNotificationTab();
             }
             return true;
